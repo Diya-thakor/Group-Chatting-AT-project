@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration</title>
+</head>
+
+<body>
+    <p *ngIf="status!=''" [style.color]="'red'">{{status}}</p>
+    <div class="container">
+        <form [formGroup]="registerationForm" (ngSubmit)="onSubmit()" #register>
+            <div class="form-group">
+                <label>User Name:</label>
+                <input #name type="text" class="form-control" formControlName="userName">
+                <span *ngIf="userName && userName.touched && userName.invalid" style="color: red;">Username is required<br><br>
+                </span>
+                
+                <label>Password</label>
+                <input #passwd type="password" class="form-control" id="password" name="password" formControlName="password" #password1>
+                <span *ngIf="password && password.touched && ((password1.length<6)|| password.invalid)" style="color: red;">Password must be present and is of atleast of 6 characters.<br><br>
+                </span>
+
+                <label>Email address</label>
+                <input #mail type="email" class="form-control" id="email" name="email" formControlName="email">
+                <span *ngIf="email && email.touched && email.invalid" style="color: red;">Email must be present.<br><br>
+                </span>
+
+                <label>Mobile Number</label>
+                <input #mo type="number" class="form-control" id="mobile" name="mobile" formControlName="mobile">
+                <span *ngIf="mobile && mobile.touched && mobile.invalid" style="color: red;">Mobile number must be present.<br><br>
+                </span>
+
+                <label>Profile Image</label>
+                <input #img type="file" class="form-control" id="profile" name="profile"
+                (change)="uploadFile($event)">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
